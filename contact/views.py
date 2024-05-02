@@ -54,10 +54,27 @@ def contact(request, id):
 
 #formulario
 class ContactForm(forms.ModelForm):
+        first_name = forms.CharField(
+            widget=forms.TextInput(
+                attrs = {'placeholder':'João'}
+            ),
+        label='Nome'    
+        )
+        last_name = forms.CharField(
+            widget=forms.TextInput(
+                attrs = {'placeholder':'Cunha Neto'}
+            ),
+            label='Último Nome'
+        )
+        phone = forms.CharField(
+            widget=forms.TextInput(
+                attrs = {'placeholder':'(99)99999-9999'}
+            ),
+            label='Telefone'        
+        )
         class Meta:
             model = Contact
-            fields = ('first_name','last_name','phone','email',)
-###############          
+            fields = ('first_name','last_name','phone','email','description')          
 
 
 
