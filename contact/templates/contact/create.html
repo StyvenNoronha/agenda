@@ -3,7 +3,7 @@
 <div class="form-wrapper">
   <h1>Novo Contato</h1>
   <form 
-    action="{% url 'contact:create'  %}" method="POST" enctype="multipart/form-data">
+    action="{% url 'contact:create'%}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="form-content">

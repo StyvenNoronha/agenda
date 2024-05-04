@@ -1,9 +1,10 @@
 from django.http import Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
 from contact.models import Contact
 from django import forms
+from django.urls import reverse
 # Create your views here.
 def index(request):
     contacts = Contact.objects.filter(show=True).order_by('-id')
@@ -85,4 +86,19 @@ def create(request):
     
     
     context = {'form':ContactForm}
+    return render(request,'contact/create.html',context)
+
+
+def update(request,contact_id):
+    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    form_action = reverse('contact:update', args=[contact_id])
+    if request.method == 'POST':
+        form = ContactForm(request.POST, instance=contact)
+        context = {'form': ContactForm(instance=contact), 'form_action': form_action}
+        if form.is_valid():
+          contact =  form.save()
+        return redirect('contact:update', args=[contact.pk])
+    
+    
+    context = {'form':ContactForm(instance=contact_id), 'form_action': form_action}
     return render(request,'contact/create.html',context)
