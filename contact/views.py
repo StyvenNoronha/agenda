@@ -87,9 +87,8 @@ def create(request):
     
     context = {'form':ContactForm}
     return render(request,'contact/create.html',context)
-
-
 def update(request,contact_id):
+
     contact = get_object_or_404(Contact, pk=contact_id, show=True)
     form_action = reverse('contact:update', args=[contact_id])
     if request.method == 'POST':
@@ -102,3 +101,7 @@ def update(request,contact_id):
     
     context = {'form':ContactForm(instance=contact_id), 'form_action': form_action}
     return render(request,'contact/create.html',context)
+def delete(request, contact_id):
+    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    contact.delete()
+    return redirect('contact:index')

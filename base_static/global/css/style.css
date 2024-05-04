@@ -312,4 +312,23 @@ svg {
     box-shadow: 0 0 5px rgb(0, 83, 134);
   }
 
- 
+
+  .contact-links {
+    margin-block: calc(var(--small-font-size) * 2);
+    display: flex;
+    align-items: center;
+    gap: 0 var(--spacing);
+  }
+  
+  .btn-link {
+    font-size: var(--small-font-size);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 1rem;
+    display: block;
+    line-height: var(--small-font-size);
+  }
+  
+  .btn-delete {
+    background: tomato;
+  }  
