@@ -15,6 +15,9 @@
         </div>
       {% endfor %}
     </div>
+    {% if field.name == 'picture' and field.value.url %}
+      <img class="contact-image" src="{{contact.picture.url}}" alt="{{contact.first_name}} ">
+    {% endif %}
     <div class="form-content">
       <div class="form-group">
         <button class="btn" type="submit">Enviar</button>

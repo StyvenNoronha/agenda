@@ -72,17 +72,23 @@ class ContactForm(forms.ModelForm):
             ),
             label='E-mail'        
         )
+        picture = forms.ImageField(
+            widget=forms.FileInput(
+                attrs={'accept':'image/*'}
+            ),
+            label='Imagem do contato'
+        )
         
         class Meta:
             model = Contact
-            fields = ('first_name','last_name','phone','email','description','category')          
+            fields = ('first_name','last_name','phone','email','description','category','picture')          
 def create(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
         context = {'form': form}
         if form.is_valid():
             form.save()
-        return redirect('/create/')
+        return redirect('contact:create')
     
     
     context = {'form':ContactForm}

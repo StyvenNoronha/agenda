@@ -331,4 +331,21 @@ svg {
   
   .btn-delete {
     background: tomato;
-  }  
+  }
+  
+
+  /* Estilo para a imagem do contato */
+.contact-image {
+  width: 100px; /* Largura da imagem */
+  height: 100px; /* Altura da imagem */
+  object-fit: cover; /* Redimensiona a imagem mantendo a proporção */
+  border: 2px solid #fff; /* Borda branca com 2px de largura */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+/* Estilo para o contêiner da imagem */
+.contact-image-container {
+  width: 100px; /* Largura do contêiner */
+  height: 100px; /* Altura do contêiner */
+  overflow: hidden; /* Esconde qualquer parte da imagem que ultrapasse o contêiner */
+}
