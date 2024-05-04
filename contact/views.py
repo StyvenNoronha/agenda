@@ -5,11 +5,6 @@ from django.core.paginator import Paginator
 from contact.models import Contact
 from django import forms
 # Create your views here.
-
-
-
-
-
 def index(request):
     contacts = Contact.objects.filter(show=True).order_by('-id')
 
@@ -50,8 +45,6 @@ def contact(request, id):
     
     context = {'contact':single_contact,'titulo':contact_name}
     return render(request,'contact/contact.html',context)
-
-
 #formulario
 class ContactForm(forms.ModelForm):
         first_name = forms.CharField(
@@ -72,24 +65,23 @@ class ContactForm(forms.ModelForm):
             ),
             label='Telefone'        
         )
+        email = forms.CharField(
+            widget=forms.TextInput(
+                attrs = {'placeholder':'example@example.com'}
+            ),
+            label='E-mail'        
+        )
+        
         class Meta:
             model = Contact
-            fields = ('first_name','last_name','phone','email','description')          
-
-
-
-
-
-
-
-
-
-
-
+            fields = ('first_name','last_name','phone','email','description','category')          
 def create(request):
     if request.method == 'POST':
-        context = {'form':ContactForm(request.POST)}
-        return render(request,'contact/create.html',context)
+        form = ContactForm(request.POST)
+        context = {'form': form}
+        if form.is_valid():
+            form.save()
+        return redirect('/create/')
     
     
     context = {'form':ContactForm}
